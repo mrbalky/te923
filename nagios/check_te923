@@ -1,0 +1,59 @@
+#!/bin/bash
+
+INVALID_VAL=-
+WARN_AGE=300
+CRIT_AGE=600
+CHECK_TSTAMP=0
+while getopts  "i:w:c:t" flag
+do
+   case "$flag" in
+      i) INVALID_VAL=$OPTARG
+         ;;
+      w) WARN_AGE=$OPTARG
+         ;;
+      c) CRIT_AGE=$OPTARG
+         ;;
+      t) CHECK_TSTAMP=1
+         ;;
+   esac
+done
+shift $((OPTIND-1))
+
+FILE="$1"
+FIELD=$2
+
+declare -a RAW=($(cat "$FILE" 2>/dev/null | sed "s/:/ /g"))
+#echo ${RAW[@]}
+#echo ${RAW[$FIELD]}
+
+if (( $CHECK_TSTAMP )); then
+   let MIN_WARN_TSTAMP=$(date +%s)-$WARN_AGE
+   let MIN_CRIT_TSTAMP=$(date +%s)-$CRIT_AGE
+   
+   VAL=${RAW[0]}
+
+   if [ "$VAL" == "$INVALID_VAL" -o "$VAL" == '' ]; then
+      echo te923 CRITICAL - $VAL - ${RAW[@]}
+      exit 2
+   fi
+
+   if [ $VAL -lt $MIN_CRIT_TSTAMP ]; then
+      echo "te923 CRITICAL - $VAL - ${RAW[@]}"
+      exit 2
+   fi
+
+   if [ $VAL -lt $MIN_WARN_TSTAMP ]; then
+      echo "te923 WARNING - $VAL - ${RAW[@]}"
+      exit 1
+   fi
+
+else
+   VAL=${RAW[$FIELD]}
+   if [ "$VAL" == "$INVALID_VAL" -o "$VAL" == '' ]; then
+      echo te923 CRITICAL - $VAL - ${RAW[@]}
+      exit 2
+   fi
+fi
+
+echo te923 OK - $VAL 
+exit 0
