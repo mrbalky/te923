@@ -1,0 +1,10 @@
+
+This directory contains a Nagios check script for the te923 scripts above, as well as a configuration
+file for the NRPE daemon to be applied on the host to which the te923 weather station is connected.
+
+Add the following line to the NRPE daemon config file /etc/nagios/nrpe.cfg:
+     include_dir=/opt/te923/nagios
+
+You can then add Nagios services on your monitor host with configuration like that
+shown in te923_services.cfg
+
