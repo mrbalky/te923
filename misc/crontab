@@ -1,0 +1,3 @@
+* * * * * /usr/bin/php /opt/te923/te923WunderUpload.php MY_STATION_ID MY_WUND_PW /opt/te923/cache/te923Cache.php >> /var/log/te923WunderUpload.out 2>&1
+0 0 * * * sleep 30;/usr/bin/php /opt/te923/te923Status.php MY_EMAIL_ADDR > /var/log/te923Status.out 2>&1
+
