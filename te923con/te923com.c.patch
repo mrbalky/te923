@@ -1,0 +1,4 @@
+155c155
+<     data->uv = bcd2int( buf[18] & 0x0F ) / 10.0 + bcd2int( ( buf[18] & 0xF0 ) >> 4 ) + bcd2int( buf[19] & 0x0F ) * 10.0;
+---
+>     data->uv = bcd2int( buf[18] & 0x0F ) / 10.0 + bcd2int( buf[18] & 0xF0 ) + bcd2int( buf[19] & 0x0F ) * 10.0;
