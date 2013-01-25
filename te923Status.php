@@ -11,7 +11,7 @@
 //   * in the the same directory as this script
 //   * in /usr/bin
 //   * in /usr/local/bin
-$pathToTE923Tool = '';
+$pathToTE923Tool = '/opt/te923/te923con';
 
 // Set to true if you want lots of debug output:
 $verbose = TRUE;

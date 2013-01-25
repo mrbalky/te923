@@ -19,7 +19,7 @@ $prevS = 0999999;
 $prevG = 0999999;
 while ( $loopCount++ < MAX_LOOPS )
 {
-  $weatherData = parseTE923WeatherData( getTE923WeatherData( '/opt/te923', FALSE, $weatherFile ) );
+  $weatherData = parseTE923WeatherData( getTE923WeatherData( '/opt/te923/te923con', FALSE, $weatherFile ) );
   if ( $weatherData['WD'] != $prevD || $weatherData['WS'] != $prevS || $weatherData['WG'] != $prevG )
     echo "\n".$weatherData['TS']."; dir: ".$weatherData['WD']."; speed: ".$weatherData['WS']."; gust: ".$weatherData['WG']."\n";
   else
