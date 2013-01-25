@@ -26,7 +26,7 @@ define( "DAYS_OF_RAIN_TO_KEEP", 4000 );
 
 // Should we keep the raw weather data in a particular file for further
 // processing (by rrd-weather, perhaps)?
-define( "KEEP_RAW_WEATHER_DATA_FILE", '~/rrdweather/consolewdfiles/te923raw.txt' );
+define( "KEEP_RAW_WEATHER_DATA_FILE", '/opt/te923/cache/te923raw.txt' );
 /*************** end configuration *********************/
 require_once( 'te923.php' );
 require_once( 'weatherFuncs.php' );

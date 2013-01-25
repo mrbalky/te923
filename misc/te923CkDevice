@@ -2,14 +2,14 @@
 
 cd `dirname $0`
 
-grep "\(-16\)" ~/cronjobs/log/te923WunderUpload.err > /dev/null 2>&1
+grep "\(-16\)" /var/log/te923WunderUpload.err > /dev/null 2>&1
 if [ $? -eq 0 ]; then
 
-   logfile=log/`date +%F-%T`
+   logfile=/var/log/`date +%F-%T`
 
    devid=2-1:1.0
-   if [ -e cache/te923dev.txt ]; then
-      devid=`cat cache/te923dev.txt`
+   if [ -e /opt/te923/cache/te923dev.txt ]; then
+      devid=`cat /opt/te923/cache/te923dev.txt`
    fi
 
   echo bash -c "echo -n $devid > /sys/bus/usb/drivers/usbhid/unbind" > $logfile
