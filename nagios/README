@@ -5,6 +5,9 @@ file for the NRPE daemon to be applied on the host to which the te923 weather st
 Add the following line to the NRPE daemon config file /etc/nagios/nrpe.cfg:
      include_dir=/opt/te923/nagios
 
-You can then add Nagios services on your monitor host with configuration like that
-shown in te923_services.cfg
+You can then add Nagios services on your monitor host.  Drop te923_services.cfg into:
+     /etc/nagios3/conf.d
+
+Copy weatherhost.cfg.example to /etc/nagios3/conf.d as well, and rename to a more appropriate name
+with the .cfg extension.  Edit to point at the server that's got the weather station attached.
 
