@@ -45,10 +45,19 @@ function addIfValid( $qsArg, $value )
 }
 
 // Command line parameters (needs usage message)
+if ( count($argv) < 3 )
+{
+  echo "USAGE:\n   $argv[0] <station ID> <wunderground password> [<cache file name>]\n";
+  exit(1);
+}
+
 $stationID = $argv[1];
 $password = $argv[2];
-$cacheFile = $argv[3];
-if ( array_key_exists( 4, $argv ) )
+if ( count($argv) > 3 )
+  $cacheFile = $argv[3];
+else
+  $cacheFile = '';
+if ( count($argv) > 4 )
   $keepRaw = $argv[4];
 else
   $keepRaw = KEEP_RAW_WEATHER_DATA_FILE;
@@ -67,7 +76,10 @@ else
   $rainInLastHour = 0;
   $windHistory = array();
   if ( $cacheFile == '' )  // no cache; just get latest conditions
+  {
+    $avgWind = array('WD' => 0, 'WS' => 0);
     $weatherData = parseTE923WeatherData( $rawData, VERBOSE );
+  }
   else
   {
     // load previous data from the cache (wipes out $weatherData)
@@ -128,7 +140,11 @@ else
     echo "Upload URL: $url\n";
 
   // Finally, upload to wunderground
-  echo( "\nUpload result: ".file_get_contents( $url ) );
+  // file_get_contents has stopped working with wunderground for some reason so wget instead.
+  // $result = file_get_contents( $url );
+  $result = exec("wget -O - '$url'");
+  echo( "\nUpload result: $result\n\n" );
+
 }
 /*************************** test code for the rain counters ****************
 $weatherData = array( 'UNIXTIME' => time(), 'RC' => 80 );

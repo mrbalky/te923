@@ -1,3 +1,4 @@
+**Newer versions of te923 tool have this bug fixed; this patch is no longer necessary**
 
 Get the source of te923tool v0.5 from http://te923.fukz.org/ and put it in this directory.
 
@@ -8,5 +9,5 @@ Apply the patch to the te923con.c source file with a command like this:
 
 Then build the te923con according to the instructions on http://te923.fukz.org/
 
-** The patch is only for v0.5 of te923tool **
+**The patch is only for v0.5 of te923tool**
 

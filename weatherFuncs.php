@@ -1,4 +1,4 @@
-<?
+<?php
 /************************************************************************/
 function updateRainCounters( $weatherData, &$rainCounters, $rainKeepLimit )
 {
@@ -143,8 +143,13 @@ function avgWindDirection( $directions, $speeds = NULL )
   }
 
   // Calculate average of stored directions
-  $cosAverage = $cosTotal / count($cosVals); // Do something with magnitude...
-  $sinAverage = $sinTotal / count($cosVals);
+  $cosAverage = 0;
+  $sinAverage = 0;
+  if ( count($cosVals) != 0 )
+  {
+    $cosAverage = $cosTotal / count($cosVals); // Do something with magnitude...
+    $sinAverage = $sinTotal / count($cosVals);
+  }
 
   // Calculate arctangent of average vectors
   $atanVal = 0.0;
